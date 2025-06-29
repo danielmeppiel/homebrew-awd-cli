@@ -1,0 +1,25 @@
+class AwdCli < Formula
+  desc "Agentic Workflow Definitions (AWD): The NPM for AI-Native Development"
+  homepage "https://github.com/danielmeppiel/awd-cli"
+  version "{{VERSION}}"
+  license "MIT"
+
+  if Hardware::CPU.arm? && OS.mac?
+    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-arm64"
+    sha256 "{{DARWIN_ARM64_SHA}}"
+  elsif Hardware::CPU.intel? && OS.mac?
+    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-x86_64"
+    sha256 "{{DARWIN_X86_64_SHA}}"
+  elsif OS.linux? && Hardware::CPU.intel?
+    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-linux-x86_64"
+    sha256 "{{LINUX_X86_64_SHA}}"
+  end
+
+  def install
+    bin.install Dir["*"].first => "awd"
+  end
+
+  test do
+    system "#{bin}/awd", "--version"
+  end
+end
