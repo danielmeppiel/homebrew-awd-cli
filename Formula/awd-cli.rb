@@ -1,34 +1,22 @@
 class AwdCli < Formula
-  desc "AI Workflow Director - Supercharge your development with AI-native workflows"
+  desc "Agentic Workflow Definitions (AWD): The NPM for AI-Native Development"
   homepage "https://github.com/danielmeppiel/awd-cli"
-  version "0.0.7"  # This will be updated automatically
+  version "0.0.7"
   license "MIT"
 
-  on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-arm64"
-      sha256 "PLACEHOLDER_ARM64_SHA"  # This will be updated automatically
-    else
-      url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-x86_64"
-      sha256 "PLACEHOLDER_X86_64_SHA"  # This will be updated automatically
-    end
-  end
-
-  on_linux do
+  if Hardware::CPU.arm? && OS.mac?
+    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-arm64"
+    sha256 "ca42e25f7056e502d5aaf9775334824e376cc7cf600ddbf32a4818a385fc3658"
+  elsif Hardware::CPU.intel? && OS.mac?
+    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-x86_64"
+    sha256 "024fbd1f6708363ed4407cd0892f16c19629f82ad13b284808aa0699b0ee77ec"
+  elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-linux-x86_64"
-    sha256 "PLACEHOLDER_LINUX_SHA"  # This will be updated automatically
+    sha256 "fdb929171ac18340099a0a3312877174540d8e365980baa4af851d67975ee400"
   end
 
   def install
-    if OS.mac?
-      if Hardware::CPU.arm?
-        bin.install "awd-darwin-arm64" => "awd"
-      else
-        bin.install "awd-darwin-x86_64" => "awd"
-      end
-    else
-      bin.install "awd-linux-x86_64" => "awd"
-    end
+    bin.install Dir["*"].first => "awd"
   end
 
   test do
