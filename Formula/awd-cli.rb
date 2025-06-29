@@ -7,16 +7,16 @@ class AwdCli < Formula
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-arm64"
-      sha256 "bca29b64a3becbd347109d6205b89ab150545b5b3058aee7ca40ccf4c6fe6393"  # This will be updated automatically
+      sha256 "ca42e25f7056e502d5aaf9775334824e376cc7cf600ddbf32a4818a385fc3658"  # This will be updated automatically
     else
       url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-x86_64"
-      sha256 "5de4941512d4f0b0d2d6f8a3e78602d10d794278d029edc7cef6eb142dfff864"  # This will be updated automatically
+      sha256 "PLACEHOLDER_AMD64_SHA"  # This will be updated automatically
     end
   end
 
   on_linux do
     url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-linux-x86_64"
-    sha256 "ac995a1eaac80e93d15098c39fbeac4407fc39aeda0429f852f763a70ef5293e"  # This will be updated automatically
+    sha256 "PLACEHOLDER_LINUX_AMD64_SHA"  # This will be updated automatically
   end
 
   def install
