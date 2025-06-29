@@ -1,7 +1,7 @@
 class AwdCli < Formula
   desc "AI Workflow Director - Supercharge your development with AI-native workflows"
   homepage "https://github.com/danielmeppiel/awd-cli"
-  version "0.0.6"  # This will be updated automatically
+  version "0.0.7"  # This will be updated automatically
   license "MIT"
 
   on_macos do
