@@ -18,6 +18,20 @@ class AwdCli < Formula
   def install
     # Install the entire directory structure since the binary depends on _internal for dependencies
     libexec.install Dir["*"]
+    
+    # On macOS, handle code signing issues properly
+    if OS.mac?
+      # Remove quarantine attributes that might interfere
+      system "xattr", "-cr", libexec, exception: false
+      
+      # Find and re-sign Python framework with ad-hoc signature to fix bundle format issues
+      python_framework = "#{libexec}/_internal/Python.framework/Python"
+      if File.exist?(python_framework)
+        system "codesign", "--force", "--sign", "-", "--preserve-metadata=entitlements", 
+               python_framework, exception: false
+      end
+    end
+    
     bin.write_exec_script libexec/"awd"
   end
 
