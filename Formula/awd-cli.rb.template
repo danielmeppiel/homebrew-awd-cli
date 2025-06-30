@@ -19,8 +19,16 @@ class AwdCli < Formula
     # Install the entire directory structure since the binary depends on _internal for dependencies
     libexec.install Dir["*"]
     
-    # Let Homebrew handle code signing automatically - no manual intervention needed
-    # PyInstaller binaries work correctly with Homebrew's automatic signing process
+    # Fix PyInstaller framework signing issue: Homebrew fails to sign Python.framework
+    # because it's ambiguous between app and framework bundle format
+    if OS.mac?
+      # Remove the problematic existing signature that confuses Homebrew's codesign
+      python_framework = "#{libexec}/_internal/Python.framework/Python"
+      if File.exist?(python_framework)
+        system "codesign", "--remove-signature", python_framework
+      end
+    end
+    
     bin.write_exec_script libexec/"awd"
   end
 
