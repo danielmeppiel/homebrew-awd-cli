@@ -19,12 +19,8 @@ class AwdCli < Formula
     # Install the entire directory structure since the binary depends on _internal for dependencies
     libexec.install Dir["*"]
     
-    # On macOS, remove quarantine attributes that prevent execution
-    # PyInstaller frameworks are already properly signed, so preserve existing signatures
-    if OS.mac?
-      system "xattr", "-cr", libexec.to_s
-    end
-    
+    # Let Homebrew handle code signing automatically - no manual intervention needed
+    # PyInstaller binaries work correctly with Homebrew's automatic signing process
     bin.write_exec_script libexec/"awd"
   end
 
