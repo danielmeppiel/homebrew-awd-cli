@@ -1,22 +1,24 @@
 class AwdCli < Formula
   desc "Agentic Workflow Definitions (AWD): The NPM for AI-Native Development"
   homepage "https://github.com/danielmeppiel/awd-cli"
-  version "0.0.7"
+  version "0.0.8"
   license "MIT"
 
   if Hardware::CPU.arm? && OS.mac?
-    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-arm64"
-    sha256 "ca42e25f7056e502d5aaf9775334824e376cc7cf600ddbf32a4818a385fc3658"
+    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-arm64.tar.gz"
+    sha256 "PLACEHOLDER_DARWIN_ARM64_SHA_FOR_TAR_GZ"
   elsif Hardware::CPU.intel? && OS.mac?
-    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-x86_64"
-    sha256 "024fbd1f6708363ed4407cd0892f16c19629f82ad13b284808aa0699b0ee77ec"
+    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-x86_64.tar.gz"
+    sha256 "PLACEHOLDER_DARWIN_X86_64_SHA_FOR_TAR_GZ"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-linux-x86_64"
-    sha256 "fdb929171ac18340099a0a3312877174540d8e365980baa4af851d67975ee400"
+    url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-linux-x86_64.tar.gz"
+    sha256 "PLACEHOLDER_LINUX_X86_64_SHA_FOR_TAR_GZ"
   end
 
   def install
-    bin.install Dir["*"].first => "awd"
+    # Install the entire directory structure since the binary depends on _internal for dependencies
+    libexec.install Dir["*"]
+    bin.write_exec_script libexec/"awd"
   end
 
   test do
