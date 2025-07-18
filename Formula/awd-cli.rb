@@ -1,18 +1,18 @@
 class AwdCli < Formula
   desc "Agentic Workflow Definitions (AWD): The NPM for AI-Native Development"
   homepage "https://github.com/danielmeppiel/awd-cli"
-  version "0.0.12"
+  version "0.0.13"
   license "MIT"
 
   if Hardware::CPU.arm? && OS.mac?
     url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-arm64.tar.gz"
-    sha256 "b95d63b72ca23e624b2fddbdd315e605ce3a400699fad0e3c38c5843475c9d4c"
+    sha256 "d1ceeab9f567938868ecc564606bfb649a246bb53a23bf3b6cb12c99ae6b8b90"
   elsif Hardware::CPU.intel? && OS.mac?
     url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-darwin-x86_64.tar.gz"
-    sha256 "149fddf081fec127eab5001106c9aa45e4506331889541fbea2032c393a23b58"
+    sha256 "0395419fcb8ceae8ed831f99492a5bbe140001390e48aa679fa5f0edefd18474"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/danielmeppiel/awd-cli/releases/download/v#{version}/awd-linux-x86_64.tar.gz"
-    sha256 "656822c32a02464a72ee9414181cc3c8fb6f0ecb62f11a26b42ea791000d1eb3"
+    sha256 "74dc9b89562a0500113300659cbe9356f1f3c302f8414f50667532ff039726c4"
   end
 
   def install
